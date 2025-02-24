@@ -15,16 +15,19 @@ class UserTest extends TestCase
         // Définition de données de test
         $email = 'test@test.com';
         $password = 'password123';
-        $username = 'TestUser';
+        $firstname = 'Quentin';
+        $lastname = 'BUTEAU';
 
         // Utilisation des setters
         $user->setEmail($email);
         $user->setPassword($password);
-        $user->setUsername($username);
+        $user->setFirstname($firstname);
+        $user->setLastname($lastname);
 
         // Vérification des getters
         $this->assertEquals($email, $user->getEmail());
         $this->assertEquals($password, $user->getPassword());
-        $this->assertEquals($username, $user->getUsername());
+        $this->assertEquals($firstname, $user->getFirstname());
+        $this->assertEquals($lastname, $user->getLastname());
     }
 }
