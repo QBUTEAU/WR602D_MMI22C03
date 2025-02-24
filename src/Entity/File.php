@@ -14,10 +14,10 @@ class File
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $pdf_name = null;
+    private ?string $pdfName = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'file')]
     private ?User $user = null;
@@ -29,24 +29,24 @@ class File
 
     public function getPdfName(): ?string
     {
-        return $this->pdf_name;
+        return $this->pdfName;
     }
 
-    public function setPdfName(string $pdf_name): static
+    public function setPdfName(string $pdfName): static
     {
-        $this->pdf_name = $pdf_name;
+        $this->pdfName = $pdfName;
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -62,5 +62,4 @@ class File
 
         return $this;
     }
-
 }
