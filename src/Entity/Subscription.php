@@ -17,13 +17,13 @@ class Subscription
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $name = !null;
 
     #[ORM\Column]
-    private ?int $maxPdf = null;
+    private ?int $maxPdf = !null;
 
     #[ORM\Column]
-    private ?float $price = null;
+    private ?float $price = !null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
