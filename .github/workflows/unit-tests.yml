@@ -1,0 +1,41 @@
+name: QBUTEAU - WR602D | Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer, phpunit, phpstan, phpcs, phpmd
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHP_CodeSniffer
+        run: vendor/bin/phpcs --standard=PSR12 src/
+
+      - name: Run PHPStan (Level 8)
+        run: vendor/bin/phpstan analyze src/
+
+      - name: Run PHPMD
+        run: vendor/bin/phpmd src/ text cleancode,codesize,controversial,design
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit tests/
