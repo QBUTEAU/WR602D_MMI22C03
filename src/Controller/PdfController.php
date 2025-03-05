@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PdfController extends AbstractController
 {
-    
     private GotenbergService $gotenbergService;
 
     public function __construct(GotenbergService $gotenbergService)
