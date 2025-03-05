@@ -1,5 +1,13 @@
+# controllers:
+#     resource:
+#         path: ../src/Controller/
+#         namespace: App\Controller
+#     type: attribute
+
+#     generate_pdf:
+#         path: /generate-pdf
+#         controller: App\Controller\PdfController::generatePdf
+
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+    resource: ../src/Controller/
     type: attribute
