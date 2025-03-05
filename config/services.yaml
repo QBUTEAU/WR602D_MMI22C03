@@ -4,9 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    gotenberg_url: 'http://gotenberg:3000'
 
 services:
     # default configuration for services in *this* file
+    App\Service\SymfonyDocs: ~
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
@@ -19,6 +21,13 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    App\Controller\:
+        resource: '../src/Controller'
+        # Exclude non-controller files or directories if necessary
+        exclude: '../src/Controller/{DependencyInjection,EventSubscriber}'
 
+    App\Service\GotenbergService:
+        arguments:
+            $gotenbergUrl: '%gotenberg_url%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
