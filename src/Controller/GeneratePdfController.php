@@ -37,7 +37,7 @@ class GeneratePdfController extends AbstractController
         $formURL->handleRequest($request);
 
         // Si le formulaire est soumis et valide
-        if ($formURL->isSubmitted() && $form->isValid()) {
+        if ($formURL->isSubmitted() && $formURL->isValid()) {
             // Récupérer l'URL saisie à partir des données du formulaire
             $url = $formURL->getData()['url'];
 
