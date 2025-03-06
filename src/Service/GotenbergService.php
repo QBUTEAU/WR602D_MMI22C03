@@ -14,6 +14,20 @@ class GotenbergService
         $this->gotenbergUrl = $gotenbergUrl;
     }
 
+    public function convertUrlToPdf(string $url): string
+    {
+        $response = $this->client->request('POST', $this->gotenbergUrl . '/forms/chromium/convert/url', [
+            'headers' => [
+                'Content-Type' => 'multipart/form-data',
+            ],
+            'body' => [
+                'url' => $url, // URL à convertir en PDF
+            ],
+        ]);
+
+        return $response->getContent(); // Retourner le contenu du PDF
+    }
+
     public function generatePdfFromHtml(string $htmlContent): string
     {
 
