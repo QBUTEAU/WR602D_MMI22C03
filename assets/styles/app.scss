@@ -1,0 +1,129 @@
+$white : #fff;
+$black : #1d1e22;
+$yellow: #feda6a;
+
+body {
+    background-color: $black;
+    margin: 0 auto;
+    min-height: calc(100vh - 30px);
+}
+
+* {
+    color: white;
+    font-family: "Poppins";
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid $white;
+    background-color: $white;
+    color: white;
+}
+
+header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 30px auto;
+    background-color: $yellow;
+    border-radius: 30px;
+    padding: 15px;
+
+    .name {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+
+        .name__logo {
+            height: 50px;
+            width: 50px;
+            border-radius: 100%;
+            border: 1px solid $black;
+            background: url(/assets/img/homme-genial.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .name__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0px 0px 5px $black;
+        }
+
+    }
+
+    .profil {
+        position: relative;
+        background-color: $black;
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        cursor: pointer;
+
+        svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 25px;
+        }
+    }
+
+    .options_profil {
+        top: 90px;
+        right: 10px;
+        text-align: right;
+        position: absolute;
+        background-color: $yellow;
+        list-style: none;
+        padding: 15px;
+        border-radius: 5px;
+
+        a {
+            text-decoration: none;
+            margin: 5px 0;
+            text-shadow: 0px 0px 20px $black;
+        }
+    }
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    line-height: 130%;
+    margin: 25px 0;
+    text-align: center;
+}
+
+a:hover {
+    text-decoration: underline !important;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+button {
+    background-color: $yellow;
+    color: $white;
+    border: 2px solid $white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-shadow: 0px 0px 10px $black;
+    cursor: pointer;
+
+    &:hover {
+        background-color: white;
+        color: rgb(33, 33, 33);
+        text-shadow: none;
+    }
+}
