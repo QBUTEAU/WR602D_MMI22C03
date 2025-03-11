@@ -8,12 +8,20 @@ class GotenbergService
 {
     private string $gotenbergUrl;
     private HttpClientInterface $client;
+    private string $publicPath;
+
     public function __construct(HttpClientInterface $client, string $gotenbergUrl)
     {
         $this->client = $client;
         $this->gotenbergUrl = $gotenbergUrl;
+
+        // Chemin vers le dossier public, vous pouvez le modifier selon votre structure de projet
+        $this->publicPath = '/var/www/html/WR602D_MMI22C03/public';  // Remplacez ce chemin par celui qui correspond à votre projet
     }
 
+    /**
+     * Convertit une URL en PDF via Gotenberg.
+     */
     public function convertUrlToPdf(string $url): string
     {
         $response = $this->client->request('POST', $this->gotenbergUrl . '/forms/chromium/convert/url', [
@@ -21,28 +29,34 @@ class GotenbergService
                 'Content-Type' => 'multipart/form-data',
             ],
             'body' => [
-                'url' => $url, // URL à convertir en PDF
+                'url' => $url, // L'URL à convertir en PDF
             ],
         ]);
 
-        return $response->getContent(); // Retourner le contenu du PDF
+        return $response->getContent();  // Retourner le contenu du PDF généré
     }
 
+    /**
+     * Convertit un contenu HTML en PDF via Gotenberg.
+     */
     public function generatePdfFromHtml(string $htmlContent): string
     {
+        // Définir le chemin du fichier HTML temporaire dans le dossier public
+        $htmlFilePath = $this->publicPath . '/index.html';
 
-        file_put_contents('/var/www/html/WR602D_MMI22C03/public/index.html', $htmlContent);
+        // Sauvegarder le contenu HTML dans un fichier
+        file_put_contents($htmlFilePath, $htmlContent);
 
-
+        // Envoyer le fichier HTML à Gotenberg pour le convertir en PDF
         $response = $this->client->request('POST', $this->gotenbergUrl . '/forms/chromium/convert/html', [
-        'headers' => [
-        'Content-Type' => 'multipart/form-data',
-        ],
-        'body' => [
-        'files' => ['index.html' => fopen('/var/www/html/WR602D_MMI22C03/public/index.html', 'r')],
-        ],
+            'headers' => [
+                'Content-Type' => 'multipart/form-data',
+            ],
+            'body' => [
+                'files' => ['index.html' => fopen($htmlFilePath, 'r')],
+            ],
         ]);
 
-        return $response->getContent();
+        return $response->getContent();  // Retourner le contenu du PDF généré
     }
 }

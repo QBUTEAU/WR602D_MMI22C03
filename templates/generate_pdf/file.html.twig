@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QB PDF - Générer un PDF{% endblock %}
+
+{% block body %}
+    <h2>Générer un PDF à partir d'un fichier</h2>
+
+    {{ form_start(form) }}
+        {{ form_row(form.file) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}
