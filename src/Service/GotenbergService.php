@@ -15,8 +15,7 @@ class GotenbergService
         $this->client = $client;
         $this->gotenbergUrl = $gotenbergUrl;
 
-        // Chemin vers le dossier public, vous pouvez le modifier selon votre structure de projet
-        $this->publicPath = '/var/www/html/WR602D_MMI22C03/public';  // Remplacez ce chemin par celui qui correspond à votre projet
+        $this->publicPath = '/var/www/html/WR602D_MMI22C03/public';
     }
 
     /**
