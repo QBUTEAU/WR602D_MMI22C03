@@ -40,7 +40,7 @@ class PdfController extends AbstractController
         ]);
     }
 
-    #[Route("/pdf", name:"pdf_results")]
+    #[Route("/pdf-test", name:"pdf-test")]
     public function generatePdf(): Response
     {
         $htmlContent = '<!DOCTYPE html>
