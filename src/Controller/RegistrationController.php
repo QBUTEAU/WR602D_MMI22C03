@@ -1,6 +1,5 @@
 <?php
 
-// src/Controller/RegistrationController.php
 namespace App\Controller;
 
 use App\Entity\User;
@@ -12,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Exception; // ✅ Ajout de l'import manquant
 
 class RegistrationController extends AbstractController
 {
@@ -25,27 +25,26 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $hashedPassword = $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
-            $user->setPassword($hashedPassword);
-            $user->setRoles(['ROLE_USER']);
-
-            $subscription = $entityManager->getRepository(Subscription::class)->find(1);
-            if ($subscription) {
-                $user->setSubscription($subscription);
-            } else {
-                throw new \Exception("L'abonnement avec l'ID 1 n'existe pas.");
-            }
-
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_login');
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->render('registration/register.html.twig', [
+                'registrationForm' => $form->createView(),
+            ]);
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        $hashedPassword = $passwordHasher->hashPassword($user, $form->get('plainPassword')->getData());
+        $user->setPassword($hashedPassword);
+        $user->setRoles(['ROLE_USER']);
+
+        $subscription = $entityManager->getRepository(Subscription::class)->find(1);
+
+        if (!$subscription) {
+            throw new Exception("L'abonnement avec l'ID 1 n'existe pas.");
+        }
+
+        $user->setSubscription($subscription);
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_login');
     }
 }

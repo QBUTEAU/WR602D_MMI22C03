@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +27,6 @@ class UserController extends AbstractController
     public function logout()
     {
         // Symfony gère la déconnexion automatiquement via security.yaml
-        throw new \Exception('This should never be reached!');
+        throw new Exception('This should never be reached!');
     }
 }
