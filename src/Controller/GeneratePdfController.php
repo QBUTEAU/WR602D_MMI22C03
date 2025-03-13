@@ -139,7 +139,7 @@ class GeneratePdfController extends AbstractController
         $user = $security->getUser();
 
         $form = $this->createFormBuilder()
-            ->add('file', FileType::class, ['label' => 'Sélectionnez un fichier :', 'mapped' => false, 'required' => true])
+            ->add('file', FileType::class, ['label' => 'Choisissez un fichier :','mapped' => false, 'required' => true])
             ->add('submit', SubmitType::class, ['label' => 'Convertir en PDF'])
             ->getForm();
 

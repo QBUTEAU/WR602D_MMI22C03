@@ -17,8 +17,8 @@ class ProfileController extends AbstractController
     #[Route('/profile/change-password', name: 'app_change_password')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function changePassword(
-        Request $request, 
-        UserPasswordHasherInterface $passwordHasher, 
+        Request $request,
+        UserPasswordHasherInterface $passwordHasher,
         EntityManagerInterface $entityManager
     ): Response {
         $user = $this->getUser();
@@ -46,8 +46,8 @@ class ProfileController extends AbstractController
     #[Route('/profile/delete', name: 'app_delete_profile', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     public function deleteProfile(
-        EntityManagerInterface $entityManager, 
-        Security $security, 
+        EntityManagerInterface $entityManager,
+        Security $security,
         Request $request
     ): Response {
         $user = $this->getUser();

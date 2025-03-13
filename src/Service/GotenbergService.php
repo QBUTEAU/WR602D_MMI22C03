@@ -60,33 +60,30 @@ class GotenbergService
     }
 
     public function convertFileToPdf(\Symfony\Component\HttpFoundation\File\UploadedFile $file): string
-{
+    {
     // Définir le dossier des uploads
-    $uploadDir = $this->publicPath . '/uploads';
+        $uploadDir = $this->publicPath . '/uploads';
 
     // Vérifier si le dossier existe, sinon le créer
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
 
     // Déplacer le fichier uploadé vers le dossier public/uploads/
-    $filePath = $uploadDir . '/' . $file->getClientOriginalName();
-    $file->move($uploadDir, $file->getClientOriginalName());
+        $filePath = $uploadDir . '/' . $file->getClientOriginalName();
+        $file->move($uploadDir, $file->getClientOriginalName());
 
     // Envoyer le fichier à Gotenberg pour conversion en PDF
-    $response = $this->client->request('POST', $this->gotenbergUrl . '/forms/libreoffice/convert', [
-    'headers' => [
-        'Accept' => 'application/pdf', 
-    ],
-    'body' => [
-        'files' => fopen($filePath, 'r'), 
-    ],
-]);
+        $response = $this->client->request('POST', $this->gotenbergUrl . '/forms/libreoffice/convert', [
+        'headers' => [
+        'Accept' => 'application/pdf',
+        ],
+        'body' => [
+        'files' => fopen($filePath, 'r'),
+        ],
+        ]);
 
 
-    return $response->getContent();
-}
-
-
-
+        return $response->getContent();
+    }
 }
