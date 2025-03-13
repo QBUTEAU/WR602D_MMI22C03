@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Modifier votre abonnement</h2>
+    <form action="{{ path('app_subscription_change') }}" method="post">
+        <label for="subscription">Sélectionnez un abonnement :</label>
+        <select name="subscription" id="subscription">
+            {% for id, subscription in subscriptions %}
+                <option value="{{ id }}" {% if id == currentSubscription %}selected{% endif %}>
+                    {{ id }} - {{ subscription.name }} | {{ subscription.price }}€ / mois
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Modifier</button>
+    </form>
+{% endblock %}

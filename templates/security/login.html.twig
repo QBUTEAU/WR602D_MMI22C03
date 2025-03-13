@@ -1,0 +1,23 @@
+{# templates/security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}QB PDF - Connexion{% endblock %}
+
+{% block body %}
+    <h2>Connexion</h2>
+    <form method="post">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="_username" required>
+        
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="_password" required>
+        
+        <button type="submit">Se connecter</button>
+    </form>
+
+    <p class="login-redir">Pas encore inscrit ? <a href="{{ path('app_register') }}">Inscrivez-vous</a> !</p>
+
+    {% if error %}
+        <p style="color: red; margin: 10px 0 0 0; text-align: center;">Adresse-mail et/ou mot de passe incorrect(s)</p>
+    {% endif %}
+{% endblock %}

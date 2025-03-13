@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QB PDF - Historique{% endblock %}
+
+{% block body %}
+    <h2>Historique de vos conversions</h2>
+
+    {% if files is empty %}
+        <p style="text-align: center">Vous n'avez pas encore converti de fichier.</p>
+    {% else %}
+        <ul class="history">
+            {% for file in files %}
+                <li class="{% if 'URL' in file.pdfName %}history_url{% elseif 'Texte' in file.pdfName %}history_text{% elseif 'Fichier' in file.pdfName %}history_file{% endif %}">
+                    Le {{ file.createdAt|date('d/m/Y \\à H:i') }} -
+                    <strong>{{ file.pdfName }}</strong>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

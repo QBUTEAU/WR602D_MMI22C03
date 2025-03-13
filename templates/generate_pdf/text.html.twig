@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QB PDF - Générer un PDF{% endblock %}
+
+{% block body %}
+
+    <h2>Générer un PDF à partir d'un texte personnalisé</h2>
+
+    {{ form_start(form, { 'attr': { 'data-turbo': "false" } }) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.content) }}
+    {{ form_widget(form.submit) }}
+    {{ form_end(form) }}
+
+{% endblock %}

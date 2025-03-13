@@ -2,16 +2,100 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/app.scss') }}">
+        <link rel="icon" href="{{ asset('build/images/homme-genial.jpg') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+         <script src="https://kit.fontawesome.com/480db9540f.js" crossorigin="anonymous"></script>
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-    </body>
+        
+        {% block header %}
+            <header>
+                <a href="{{ path('app_home')}}" class="name">
+                    <div class="name__logo"></div>
+                    <span class="name__title">QB PDF Converter</span>
+                </a>
+
+                <div class="profil">
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#393e41" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
+                </div>
+
+                {# Pop-up de profil #}
+                <ul class="options_profil">
+                    <li><a href="{{ path('app_profil')}}" class="options_profil__item">Voir le Profil</a></li>
+                    <li><a href="{{ path('app_logout')}}" class="options_profil__item">Déconnexion</a></li>
+                </ul>
+            </header>
+        {% endblock %}
+
+        {% if app.request.get('_route') not in ['app_login', 'app_register'] %}
+            <div class="burger">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
+            </div>
+
+            <ul class="menu">
+                <li><a href="{{ path('app_pdf')}}" class="menu__item">Générer un PDF</a></li>
+                <li><a href="{{ path('app_subscription_change')}}" class="menu__item">Changer d'abonnement</a></li>
+                <li><a href="{{ path('app_history')}}" class="menu__item">Mon historique</a></li>
+            </ul>
+        {% endif %}
+
+            <footer>
+                &copy; 2025 - <a href="http://qbuteau.fr" target="_blank">Quentin BUTEAU</a> | Tous droits réservés
+            </footer>
+
+        {% block body %}{% endblock %}  
+
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("Script chargé"); // Vérification
+
+        const profil = document.querySelector(".profil");
+        const optionsProfil = document.querySelector(".options_profil");
+        const burger = document.querySelector(".burger");
+        const menu = document.querySelector(".menu");
+
+        if (!profil || !optionsProfil || !burger || !menu) {
+            console.log("Un des éléments n'est pas trouvé !");
+            return;
+        }
+
+        profil.addEventListener("click", function (event) {
+            event.stopPropagation();
+            optionsProfil.classList.toggle("show");
+        });
+
+        burger.addEventListener("click", function (event) {
+            event.stopPropagation();
+            menu.classList.toggle("show");
+        });
+
+        document.addEventListener("click", function () {
+            optionsProfil.classList.remove("show");
+            menu.classList.remove("show");
+        });
+
+        optionsProfil.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+
+        menu.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    });
+</script>
+</body>
 </html>
+
+
