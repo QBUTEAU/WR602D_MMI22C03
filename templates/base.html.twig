@@ -28,29 +28,31 @@
                 </a>
 
                 <div class="profil">
-                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#393e41" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
                 </div>
 
                 {# Pop-up de profil #}
                 <ul class="options_profil">
-                    <li><a href="" class="options_profil__item">Voir le Profil</a></li>
-                    <li><a href="" class="options_profil__item">Déconnexion</a></li>
+                    <li><a href="{{ path('app_profil')}}" class="options_profil__item">Voir le Profil</a></li>
+                    <li><a href="{{ path('app_logout')}}" class="options_profil__item">Déconnexion</a></li>
                 </ul>
             </header>
         {% endblock %}
 
+        {% if app.request.get('_route') not in ['app_login', 'app_register'] %}
             <div class="burger">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></svg>
             </div>
 
             <ul class="menu">
                 <li><a href="{{ path('app_pdf')}}" class="menu__item">Générer un PDF</a></li>
-                <li><a href="{{ path('app_subscription')}}" class="menu__item">Changer d'abonnement</a></li>
+                <li><a href="{{ path('app_subscription_change')}}" class="menu__item">Changer d'abonnement</a></li>
                 <li><a href="{{ path('app_history')}}" class="menu__item">Mon historique</a></li>
             </ul>
+        {% endif %}
 
             <footer>
-                <p>&copy; 2025 - <a href="http://qbuteau.fr" target="_blank">Quentin BUTEAU</a> | Tous droits réservés</p>
+                &copy; 2025 - <a href="http://qbuteau.fr" target="_blank">Quentin BUTEAU</a> | Tous droits réservés
             </footer>
 
         {% block body %}{% endblock %}  

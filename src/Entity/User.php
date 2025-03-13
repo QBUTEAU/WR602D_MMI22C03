@@ -22,26 +22,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\ManyToOne(targetEntity: Subscription::class, inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Subscription $subscription = null;
 
-    /**
-     * @var Collection<int, File>
-     */
-    #[ORM\OneToMany(targetEntity: File::class, mappedBy: 'users')]
-    private Collection $file;
+    #[ORM\OneToMany(targetEntity: File::class, mappedBy: 'user')]
+    private Collection $files;
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
@@ -51,7 +43,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->file = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
+        $this->files = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,47 +60,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return array_unique($this->roles);
     }
 
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): ?string
     {
         return $this->password;
@@ -116,18 +87,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials(): void
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
+    public function eraseCredentials(): void {}
 
     public function getSubscription(): ?Subscription
     {
@@ -137,23 +100,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSubscription(?Subscription $subscription): static
     {
         $this->subscription = $subscription;
-
         return $this;
     }
 
-    /**
-     * @return Collection<int, File>
-     */
-    public function getFile(): Collection
+    public function getFiles(): Collection
     {
-        return $this->file;
+        return $this->files;
     }
 
     public function addFile(File $file): static
     {
-        if (!$this->file->contains($file)) {
-            $this->file->add($file);
-            $file->setUsers($this);
+        if (!$this->files->contains($file)) {
+            $this->files->add($file);
+            $file->setUser($this);
         }
 
         return $this;
@@ -161,10 +120,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeFile(File $file): static
     {
-        if ($this->file->removeElement($file)) {
-            // set the owning side to null (unless already changed)
-            if ($file->getUsers() === $this) {
-                $file->setUsers(null);
+        if ($this->files->removeElement($file)) {
+            if ($file->getUser() === $this) {
+                $file->setUser(null);
             }
         }
 
@@ -179,7 +137,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
         return $this;
     }
 
@@ -191,7 +148,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(string $firstname): static
     {
         $this->firstname = $firstname;
-
         return $this;
     }
 }

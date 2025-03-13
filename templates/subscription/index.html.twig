@@ -1,20 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SubscriptionController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h2>Modifier votre abonnement</h2>
+    <form action="{{ path('app_subscription_change') }}" method="post">
+        <label for="subscription">Sélectionnez un abonnement :</label>
+        <select name="subscription" id="subscription">
+            {% for id, subscription in subscriptions %}
+                <option value="{{ id }}" {% if id == currentSubscription %}selected{% endif %}>
+                    {{ id }} - {{ subscription.name }} | {{ subscription.price }}€ / mois
+                </option>
+            {% endfor %}
+        </select>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/var/www/html/WR602D_MMI22C03/src/Controller/SubscriptionController.php</code></li>
-        <li>Your template at <code>/var/www/html/WR602D_MMI22C03/templates/subscription/index.html.twig</code></li>
-    </ul>
-</div>
+        <button type="submit">Modifier</button>
+    </form>
 {% endblock %}

@@ -1,6 +1,6 @@
-$white : #fff;
-$black : #1d1e22;
-$yellow: #feda6a;
+$black : #393e41;
+$white : #f6f7eb;
+$red: #e94f37;
 
 @mixin flex-center($direction: column) {
     display: flex;
@@ -11,13 +11,12 @@ $yellow: #feda6a;
 
 body {
     position: relative;
-    background-color: $black;
+    background-color: $white;
     margin: 0 auto;
     min-height: calc(100vh - 30px);
 }
 
 * {
-    color: white;
     font-family: "Poppins";
 }
 
@@ -27,8 +26,8 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    margin: 30px auto;
-    background-color: $yellow;
+    margin: 30px auto 0 auto;
+    background-color: $red;
     border-radius: 30px;
     padding: 15px;
 
@@ -42,23 +41,23 @@ header {
             height: 50px;
             width: 50px;
             border-radius: 100%;
-            border: 2px solid $black;
-            background: url(/assets/img/homme-genial.jpg);
-            background-size: cover;
+            border: 2px solid $white;
+            background: url(/assets/img/aja.png);
+            background-size: 120%;
             background-position: center;
         }
 
         .name__title {
             font-size: 1.5rem;
             font-weight: 700;
-            text-shadow: 0px 0px 5px $black;
+            color: $white;
         }
 
     }
 
     .profil {
         position: relative;
-        background-color: $black;
+        background-color: $white;
         border-radius: 100%;
         height: 50px;
         width: 50px;
@@ -79,15 +78,15 @@ header {
         right: 10px;
         text-align: right;
         position: absolute;
-        background-color: $yellow;
+        background-color: $red;
         list-style: none;
         padding: 15px;
         border-radius: 5px;
 
         a {
+            color: $white;
             text-decoration: none;
             margin: 5px 0;
-            text-shadow: 0px 0px 20px $black;
         }
     }
 }
@@ -95,14 +94,14 @@ header {
 .burger {
     z-index: 4;
     position: fixed;
-    background-color: $yellow;
+    background-color: $red;
     border-radius: 100%;
     height: 50px;
     width: 50px;
     cursor: pointer;
     bottom: 35px;
     right: 35px;
-    border: 2px solid $black;
+    border: 2px solid $white;
 
     svg {
         position: absolute;
@@ -118,57 +117,66 @@ header {
     z-index: 5;
     position: fixed;
     list-style: none;
-    background-color: $yellow;
+    background-color: $red;
     padding: 15px;
     border-radius: 5px;
     text-align: right;
     right: 35px;
     bottom: 80px;
-    box-shadow: 0 0 10px $black;
+    border: 2px solid $white;
 
     a {
+        color: $white;
         text-decoration: none;
         margin: 5px 0;
-        text-shadow: 0px 0px 20px $black;
+    }
+}
+
+.hero-header {
+    @include flex-center();
+    height: 60vh;
+
+    h1 {
+        font-size: 2.5em;
+        margin: 0;
+        text-align: center;
+
+        span {
+            font-weight: 700;
+        }
+
+    }
+
+    .hero-header__links {
+        list-style: none;
+        padding: 0;
+        margin-top: 50px;
+        display: flex;
+        gap: 20px;
     }
 }
 
 .presentation {
     font-size: 16px;
-    width: 75%;
+    width: 75vw;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    background-color: $yellow;
+    background-color: $red;
     border-radius: 30px;
     padding: 30px;
     gap: 35px;
     margin-bottom: 60px;
+    color: $white;
 
     .presentation__img {
-        height: 300px;
-        width: 300px;
+        height: 280px;
+        width: 280px;
     }
-
-    .presentation__txt {
-        text-shadow: 0px 0px 20px $black;
-    }
-}
-
-h1 {
-    font-weight: 500 !important;
-    font-size: 3rem;
-    margin: 40px 0 25px 0 !important;
-    text-align: center;
-
-    span {
-        font-weight: 700;
-    }
-
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1.8em;
     margin-bottom: 50px !important;
     line-height: 130%;
     margin: 25px 0;
@@ -176,13 +184,12 @@ h2 {
 }
 
 h3 {
-    font-size: 1.8em;
-    color: #333;
+    font-size: 1.5em;
     margin: 0 0 20px 0;
 }
 
 p {
-    font-size: 16px;
+    font-size: 14px;
     margin: 0;
 }
 
@@ -202,39 +209,48 @@ form {
 
     div {
         @include flex-center();
-        margin-bottom: 30px;
+        // margin-bottom: 30px;
+    }
 
-        input,
-        textarea {
-            padding: 10px;
-            margin: 10px;
-            width: 280px;
-            border-radius: 5px;
-            border: 1px solid $white;
-            background-color: $black;
-            color: white;
-        }
+    input,
+    textarea,
+    select,
+    option {
+        padding: 10px;
+        margin: 0 10px 10px 10px;
+        width: 280px;
+        border-radius: 5px;
+        border: 1px solid $white;
+        background-color: $black;
+        color: white;
     }
 }
 
+.form-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+}
+
 button,
-.offer-button {
-    background-color: $yellow;
+.offer-button,
+.hero-header__links a,
+.profil-page__options a {
+    background-color: $red;
     color: $white;
     border: 2px solid $white;
     padding: 10px 20px;
     border-radius: 5px;
-    text-shadow: 0px 0px 10px $black;
     cursor: pointer;
     font-size: 14px;
     text-decoration: none;
     text-transform: uppercase;
 
     &:hover {
-        background-color: white;
-        color: rgb(33, 33, 33);
+        background-color: $white;
+        color: $black;
         border: 2px solid $black;
-        text-shadow: none;
     }
 }
 
@@ -271,13 +287,12 @@ button,
 
     h3 {
         font-size: 1.8em;
-        color: #333;
+        color: $black;
         grid-area: title;
         margin: 20px 0 10px 0;
     }
 
     p {
-        color: #666;
         margin-bottom: 15px;
         grid-area: description;
     }
@@ -288,7 +303,6 @@ button,
         font-size: 16px;
         padding: 0;
         margin-top: 10px;
-        color: #666;
         grid-area: list;
 
         li {
@@ -305,19 +319,8 @@ button,
     }
 
     &-standard {
-        background-color: $black;
-        border: 2px solid $white;
-        grid-template-rows: auto auto auto 1fr auto;
-
-        .price,
-        h3 {
-            color: $white;
-        }
-    }
-
-    &-expert {
         background-color: $white;
-        border: 2px solid $white;
+        border: 2px solid $black;
         grid-template-rows: auto auto auto 1fr auto;
 
         li {
@@ -325,38 +328,163 @@ button,
         }
     }
 
+    &-expert {
+        background-color: $black;
+        border: 2px solid $black;
+        grid-template-rows: auto auto auto 1fr auto;
+
+        h3,
+        li,
+        .price {
+            color: $white;
+        }
+    }
+
     &-premium {
-        background-color: $yellow;
-        border: 2px solid $yellow;
+        background-color: $red;
+        border: 2px solid $red;
         grid-template-rows: auto auto auto auto 1fr auto;
 
-        li {
-            text-shadow: 0px 0px 10px $black;
+        h3,
+        li,
+        .price {
+            color: $white;
         }
     }
 }
 
 .p-subs {
-    margin: 20px 0 90px 0;
+    margin: 20px auto 90px auto;
     font-size: 13px;
     font-style: italic;
     text-align: center;
+    background-color: $red;
+    color: $white;
+    width: max-content;
+    padding: 3px 10px;
+    border-radius: 10px;
 
     a {
-        color: $yellow;
+        color: $white;
+        font-weight: 700;
     }
+}
+
+.h2-file {
+    margin-bottom: 0 !important;
+}
+
+.type-file {
+    margin: 5px auto 0 auto;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 700;
+    color: $white;
+    background-color: $red;
+    padding: 3px 10px;
+    border-radius: 10px;
+    width: max-content;
+}
+
+.profil-page {
+    margin: 0 auto;
+    width: max-content;
+    text-align: center;
+    background: $black;
+    color: $white;
+    padding: 30px;
+    border-radius: 10px;
+
+    h4 {
+        margin: 0 0 10px 0;
+        font-size: 2em;
+    }
+
+    span {
+        font-weight: bold;
+    }
+}
+
+.delete {
+    margin: 10px auto;
+}
+
+.profil-page__options {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.login-redir {
+    font-style: italic;
+    padding: 3px 10px;
+    border-radius: 10px;
+    background-color: $red;
+    color: $white;
+    margin: 0 auto;
+    width: max-content;
+
+    a {
+        color: $white;
+        font-weight: 700;
+    }
+}
+
+.history {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: max-content;
+    list-style: none;
+    padding: 0;
+    gap: 10px;
+
+    li {
+        font-style: italic;
+        text-align: center;
+        font-size: 14px;
+        padding: 3px 10px;
+        border-radius: 10px;
+    }
+
+    .history_url {
+        color: $black;
+        background-color: $white;
+        border: 2px solid $black;
+    }
+
+    .history_text {
+        color: $white;
+        background-color: $black;
+    }
+
+    .history_file {
+        color: $white;
+        background-color: $red;
+    }
+
 }
 
 
 footer {
     position: fixed;
     bottom: 0px;
-    background-color: $yellow;
-    padding: 13px;
+    background-color: $red;
+    padding: 13px 0;
     width: 100vw;
-    font-size: 12px !important;
+    font-size: 14px;
     text-align: center;
-    text-shadow: 0px 0px 15px $black;
+    color: $white;
+    border-top: 2px solid $white;
+
+    a {
+        color: $white;
+    }
 }
 
 
@@ -415,6 +543,10 @@ footer {
         svg {
             height: 100px !important;
         }
+    }
+
+    footer {
+        font-size: 12px;
     }
 
 }
