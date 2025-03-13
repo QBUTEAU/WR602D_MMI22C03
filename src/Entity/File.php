@@ -14,7 +14,7 @@ class File
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $pdfName = !null;
+    private ?string $pdfName = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;

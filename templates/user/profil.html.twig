@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QB PDF - Profil{% endblock %}
+
+{% block body %}
+
+    <h2>Mon profil</h2>
+
+    <section class="profil-page">
+        <h4> {{ user.firstname }} {{ user.lastname }}</h4>
+        <p>Adresse-mail : <span>{{ user.email }}</span></p>
+        <p>Vous avez l'abonnement <span>{{ user.subscription.name }}</span>.</p>
+    </section>
+
+    <ul class="profil-page__options">
+        <li><a href="{{ path('app_change_password')}}">Modifier le mot de passe</a></li>
+        <li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
+    </ul>
+
+    <form class="delete" action="{{ path('app_delete_profile') }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete_profile') }}">
+        <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+    </form>
+
+{% endblock %}
