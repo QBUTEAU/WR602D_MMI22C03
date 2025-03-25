@@ -35,32 +35,32 @@ class GeneratePdfController extends AbstractController
         $this->fileRepository = $fileRepository;
     }
 
- #[Route('/pdf', name: 'app_pdf')]
-public function pdfPage(Security $security): Response
-{
-    $user = $security->getUser();
-    $subscription = $user?->getSubscription();
+    #[Route('/pdf', name: 'app_pdf')]
+    public function pdfPage(Security $security): Response
+    {
+        $user = $security->getUser();
+        $subscription = $user?->getSubscription();
 
-    // Récupérer maxPdf depuis l'abonnement
-    $maxPdf = $subscription ? $subscription->getMaxPdf() : 3;
-    $pdfCountToday = $this->fileRepository->countUserFilesToday($user);
+        // Récupérer maxPdf depuis l'abonnement
+        $maxPdf = $subscription ? $subscription->getMaxPdf() : 3;
+        $pdfCountToday = $this->fileRepository->countUserFilesToday($user);
 
-    // Mapping des abonnements vers des IDs fixes
-    $subscriptionMapping = [
+        // Mapping des abonnements vers des IDs fixes
+        $subscriptionMapping = [
         'Standard' => 1,
         'Expert' => 2,
         'Premium' => 3,
-    ];
+        ];
 
-    // Obtenir l'ID correspondant au nom de l'abonnement
-    $subscriptionId = $subscription ? ($subscriptionMapping[$subscription->getName()] ?? 1) : 1;
+        // Obtenir l'ID correspondant au nom de l'abonnement
+        $subscriptionId = $subscription ? ($subscriptionMapping[$subscription->getName()] ?? 1) : 1;
 
-    return $this->render('generate_pdf/index.html.twig', [
+        return $this->render('generate_pdf/index.html.twig', [
         'subscriptionId' => $subscriptionId,
         'pdfCountToday' => $pdfCountToday,
         'maxPdf' => $maxPdf,
-    ]);
-}
+        ]);
+    }
 
 
 
