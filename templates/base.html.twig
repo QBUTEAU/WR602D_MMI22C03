@@ -8,7 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-         <script src="https://kit.fontawesome.com/480db9540f.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/480db9540f.js" crossorigin="anonymous"></script>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -33,7 +33,7 @@
 
                 {# Pop-up de profil #}
                 <ul class="options_profil">
-                    <li><a href="{{ path('app_profil')}}" class="options_profil__item">Voir le Profil</a></li>
+                    <li><a href="{{ path('app_profil')}}" class="options_profil__item">Mon profil</a></li>
                     <li><a href="{{ path('app_logout')}}" class="options_profil__item">Déconnexion</a></li>
                 </ul>
             </header>
@@ -46,8 +46,8 @@
 
             <ul class="menu">
                 <li><a href="{{ path('app_pdf')}}" class="menu__item">Générer un PDF</a></li>
-                <li><a href="{{ path('app_subscription_change')}}" class="menu__item">Changer d'abonnement</a></li>
                 <li><a href="{{ path('app_history')}}" class="menu__item">Mon historique</a></li>
+                <li><a href="{{ path('app_subscription_change')}}" class="menu__item">Changer d'abonnement</a></li>
             </ul>
         {% endif %}
 
@@ -58,7 +58,7 @@
         {% block body %}{% endblock %}  
 
         <script>
-    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
         console.log("Script chargé"); // Vérification
 
         const profil = document.querySelector(".profil");
@@ -95,6 +95,7 @@
         });
     });
 </script>
+
 </body>
 </html>
 

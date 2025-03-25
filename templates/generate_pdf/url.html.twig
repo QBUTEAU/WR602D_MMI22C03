@@ -1,5 +1,3 @@
-{# templates/generate_pdf/index.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}QB PDF - Générer un PDF{% endblock %}
@@ -8,7 +6,7 @@
 
     <h2>Générer un PDF à partir d'une URL</h2>
 
-    {{ form_start(form, { 'attr': { 'data-turbo': "false" } }) }}
+    {{ form_start(form, { 'attr': { 'data-turbo': "false", 'class': "form" } }) }}
     {{ form_row(form.url) }}
     {{ form_widget(form.submit) }}
     {{ form_end(form) }}
