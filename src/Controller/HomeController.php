@@ -2,17 +2,26 @@
 
 namespace App\Controller;
 
+use App\Entity\Subscription;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\SecurityBundle\Security;
 
-final class HomeController extends AbstractController
+class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function home(EntityManagerInterface $entityManager, Security $security): Response
     {
+        $user = $security->getUser();
+
+        // Récupère tous les abonnements
+        $subscriptions = $entityManager->getRepository(Subscription::class)->findAll();
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'subscriptions' => $subscriptions,
+            'currentSubscription' => $user ? $user->getSubscription() : null,
         ]);
     }
 }

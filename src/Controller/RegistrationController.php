@@ -13,8 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Exception;
 
-// ✅ Ajout de l'import manquant
-
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
@@ -28,7 +26,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            return $this->render('registration/register.html.twig', [
+            return $this->render('registration/index.html.twig', [
                 'registrationForm' => $form->createView(),
             ]);
         }
@@ -40,7 +38,11 @@ class RegistrationController extends AbstractController
         $subscription = $entityManager->getRepository(Subscription::class)->find(1);
 
         if (!$subscription) {
-            throw new Exception("L'abonnement avec l'ID 1 n'existe pas.");
+            $subscription = $entityManager->getRepository(Subscription::class)->find(4);
+        }
+
+        if (!$subscription) {
+            throw new Exception("Aucun abonnement par défaut (ID 1 ou 4) n'a été trouvé.");
         }
 
         $user->setSubscription($subscription);

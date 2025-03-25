@@ -14,35 +14,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProfileController extends AbstractController
 {
-    #[Route('/profile/change-password', name: 'app_change_password')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function changePassword(
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $entityManager
-    ): Response {
-        $user = $this->getUser();
-        $form = $this->createForm(ChangePasswordType::class);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $newPassword = $form->get('newPassword')->getData();
-            $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
-
-            $user->setPassword($hashedPassword);
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Votre mot de passe a été mis à jour.');
-
-            return $this->redirectToRoute('app_profil');
-        }
-
-        return $this->render('user/change_password.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
     #[Route('/profile/delete', name: 'app_delete_profile', methods: ['POST'])]
     #[IsGranted('ROLE_USER')]
     public function deleteProfile(

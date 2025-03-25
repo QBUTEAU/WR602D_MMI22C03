@@ -8,12 +8,19 @@
 
     <section class="profil-page">
         <h4> {{ user.firstname }} {{ user.lastname }}</h4>
-        <p>Adresse-mail : <span>{{ user.email }}</span></p>
+        <p class="email">{{ user.email }}</p>
+
+        {% if pdfCount == 0 %}
+            <p>Vous n'avez généré aucun PDF depuis votre inscription.</p>
+        {% elseif pdfCount == 1 %}
+            <p><span>{{ pdfCount }}</span> PDF généré depuis votre inscription.</p>
+        {% else %}
+            <p><span>{{ pdfCount }}</span> PDF générés depuis votre inscription.</p>
+        {% endif %}
         <p>Vous avez l'abonnement <span>{{ user.subscription.name }}</span>.</p>
     </section>
 
     <ul class="profil-page__options">
-        <li><a href="{{ path('app_change_password')}}">Modifier le mot de passe</a></li>
         <li><a href="{{ path('app_logout')}}">Déconnexion</a></li>
     </ul>
 
