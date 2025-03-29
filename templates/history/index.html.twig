@@ -9,9 +9,19 @@
         <p style="text-align: center">Vous n'avez pas encore converti de fichier.</p>
     {% else %}
         <ul class="history">
+            {% set lastDate = null %}
+            
             {% for file in files %}
+                {% set currentDate = file.createdAt|date('d/m/Y') %}
+                
+                {# Si la date change, afficher un titre #}
+                {% if lastDate != currentDate %}
+                    <h4>{{ currentDate }}</h4>
+                    {% set lastDate = currentDate %}
+                {% endif %}
+                
                 <li class="{% if 'URL' in file.pdfName %}history_url{% elseif 'Texte' in file.pdfName %}history_text{% elseif 'Fichier' in file.pdfName %}history_file{% endif %}">
-                    Le {{ file.createdAt|date('d/m/Y \\à H:i') }} -
+                    Le {{ file.createdAt|date('d/m/Y \\à H:i') }} - 
                     <strong>{{ file.pdfName }}</strong>
                 </li>
             {% endfor %}

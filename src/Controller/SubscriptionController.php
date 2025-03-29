@@ -26,9 +26,9 @@ class SubscriptionController extends AbstractController
 
         // Liste des abonnements et rôles associés
         $subscriptions = [
-        1 => ['name' => 'Standard', 'price' => 0.00, 'role' => 'ROLE_USER'],
-        2 => ['name' => 'Expert', 'price' => 4.99, 'role' => 'ROLE_EXPERT'],
-        3 => ['name' => 'Premium', 'price' => 9.99, 'role' => 'ROLE_PREMIUM'],
+        4 => ['name' => 'Standard', 'price' => 0.00, 'role' => 'ROLE_USER'],
+        5 => ['name' => 'Expert', 'price' => 4.99, 'role' => 'ROLE_EXPERT'],
+        6 => ['name' => 'Premium', 'price' => 9.99, 'role' => 'ROLE_PREMIUM'],
         ];
 
         if ($request->isMethod('POST')) {
@@ -49,7 +49,7 @@ class SubscriptionController extends AbstractController
                     $entityManager->persist($user);
                     $entityManager->flush();
 
-                    return $this->redirectToRoute('app_profil'); // Redirige vers le profil après modification
+                    return $this->redirectToRoute('app_pdf');
                 }
             }
         }

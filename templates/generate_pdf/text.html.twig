@@ -4,12 +4,39 @@
 
 {% block body %}
 
-    <h2>Générer un PDF à partir d'un texte personnalisé</h2>
+    <h2>Générer un PDF à partir d'un contenu HTML</h2>
 
-    {{ form_start(form, { 'attr': { 'data-turbo': "false" } }) }}
+    {# {{ form_start(form, { 'attr': { 'data-turbo': "false" } }) }}
     {{ form_row(form.title) }}
     {{ form_row(form.content) }}
     {{ form_widget(form.submit) }}
+    {{ form_end(form) }} #}
+
+    {{ form_start(form, { 'attr': { 'class': 'html' } }) }}
+        {{ form_row(form.htmlContent) }}
+        {{ form_row(form.submit) }}
     {{ form_end(form) }}
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+    <script>
+        tinymce.init({
+            selector: '.tinymce',
+            plugins: 'autoresize code',
+            toolbar: 'undo redo | styleselect | bold italic underline | alignleft aligncenter alignright | code',
+            menubar: false,
+            setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
+            }
+        });
+
+        document.querySelector('form').onsubmit = function() {
+            tinyMCE.triggerSave();
+        };
+    </script>
 {% endblock %}

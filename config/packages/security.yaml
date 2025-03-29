@@ -28,6 +28,9 @@ security:
     access_control:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/register, roles: PUBLIC_ACCESS }
-        - { path: ^/, roles: IS_AUTHENTICATED }
+        - { path: ^/forgot-password, roles: PUBLIC_ACCESS }
+        - { path: ^/reset-password, roles: PUBLIC_ACCESS }
+        - { path: ^/pdf, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/, roles: PUBLIC_ACCESS }
         - { path: ^/pdf/from-text, roles: ROLE_EXPERT }
         - { path: ^/pdf/from-file, roles: ROLE_PREMIUM }
