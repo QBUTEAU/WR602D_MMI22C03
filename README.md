@@ -7,8 +7,7 @@ This project is part of the **WR602 - Web Development and Interactive Devices** 
 - **User authentication** (login, registration)  
 - **Subscription system** with different tiers (Standard, Expert, Premium)  
 - **PDF generation** from URLs, text input, or file uploads  
-- **User dashboard** to track PDF conversions  
-- **Admin panel** to manage users and subscriptions  
+- **User dashboard** to track PDF conversions   
 - **Cypress E2E tests** to ensure application stability  
 
 ## Prerequisites  
