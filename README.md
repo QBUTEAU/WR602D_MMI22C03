@@ -50,7 +50,12 @@ php bin/console doctrine:migrations:migrate
 ### 5. Load dummy data  
 ```sh
 php bin/console doctrine:fixtures:load  
-```  
+```
+
+### 6. Install Cypress
+```sh
+npm install cypress --save-dev
+```
 
 ## Running Cypress E2E Tests  
 To ensure the application is working correctly, you can run Cypress tests:  
@@ -64,7 +69,7 @@ Make sure your **Docker environment** is properly configured and that the **Apac
 
 ## Developer & Teacher  
 - **Quentin Buteau** - B.U.T.3 MMI Student  
-- **Romain Delon** - Instructor at IUT de Troyes  
+- **Romain Delon** - Teacher and Head of the MMI department at IUT de Troyes  
 
 ### &copy; 2025 - Quentin BUTEAU | All rights reserved  
 
