@@ -3,8 +3,8 @@ describe('Formulaire de Connexion', () => {
     cy.visit('/login');  // Remplacez par l'URL de votre application
 
     // Entrer le nom d'utilisateur et le mot de passe
-    cy.get('#email').type('buteauquentin10@gmail.com');
-    cy.get('#password').type('quentin');
+    cy.get('#email').type('test@wr602d.com');
+    cy.get('#password').type('1234');
 
     // Soumettre le formulaire
     cy.get('button[type="submit"]').click();
@@ -17,8 +17,8 @@ describe('Formulaire de Connexion', () => {
     cy.visit('/login');  // Remplacez par l'URL de votre application
 
     // Entrer un nom d'utilisateur et un mot de passe incorrects
-    cy.get('#email').type('buteauquentin10@gmail.com');
-    cy.get('#password').type('qnb');
+    cy.get('#email').type('test@cypress.com');
+    cy.get('#password').type('5678');
 
     // Soumettre le formulaire
     cy.get('button[type="submit"]').click();
@@ -27,3 +27,4 @@ describe('Formulaire de Connexion', () => {
     cy.contains('Adresse-mail et/ou mot de passe incorrect(s)').should('exist');
   });
 });
+
